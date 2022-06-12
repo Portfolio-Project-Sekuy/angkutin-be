@@ -2,12 +2,15 @@ package console
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
+	"github.com/Portfolio-Project-Sekuy/angkutin-be/internal/delivery/graphqlsvc/graph/generated"
 	"net/http"
 	"os"
 
+	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/Portfolio-Project-Sekuy/angkutin-be/internal/config"
+	"github.com/Portfolio-Project-Sekuy/angkutin-be/internal/delivery/graphqlsvc/graph"
 	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -40,6 +43,16 @@ func run(cmd *cobra.Command, args []string) {
 	}()
 
 	server := echo.New()
+	server.GET("/ping", func(c echo.Context) error {
+		return c.String(http.StatusOK, "pong")
+	})
+
+	gqlConfig := generated.Config{Resolvers: &graph.Resolver{}}
+	gqlHandler := handler.NewDefaultServer(generated.NewExecutableSchema(gqlConfig))
+	server.POST("/query", func(c echo.Context) error {
+		gqlHandler.ServeHTTP(c.Response(), c.Request())
+		return nil
+	})
 
 	go func() {
 		err := server.Start(fmt.Sprintf(":%s", config.HTTPPort()))
