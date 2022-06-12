@@ -1,0 +1,11 @@
+type Order @key(fields: "id") {
+    id: ID!
+    senderName: String!
+    senderPhoneNumber: String!
+    receiverName: String!
+    receiverPhoneNumber: String!
+}
+
+extend type Query {
+    order(id: ID!): Order!
+}
