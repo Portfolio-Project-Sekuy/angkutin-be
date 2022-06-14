@@ -1,4 +1,4 @@
 vendor/
-/config.yml
+/app.env
 .vscode
 .idea/

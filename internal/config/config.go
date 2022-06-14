@@ -9,11 +9,8 @@ import (
 // GetConfig get config
 func GetConfig() {
 	viper.AddConfigPath(".")
-	viper.AddConfigPath("./..")
-	viper.AddConfigPath("./../..")
-	viper.AddConfigPath("./../../..")
-	viper.SetConfigName("config")
-	viper.SetEnvPrefix("svc")
+	viper.SetConfigName("app")
+	viper.SetConfigType("env")
 
 	replacer := strings.NewReplacer(".", "_")
 	viper.SetEnvKeyReplacer(replacer)

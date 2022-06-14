@@ -1,3 +1,0 @@
-env: "development"
-log_level: "debug"
-http_port: 8080
