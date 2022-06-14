@@ -23,15 +23,15 @@ func GetConfig() {
 
 // Env env
 func Env() string {
-	return viper.GetString("env")
+	return viper.GetString("ENV")
 }
 
 // LogLevel log level
 func LogLevel() string {
-	return viper.GetString("log_level")
+	return viper.GetString("LOG_LEVEL")
 }
 
-// HTTPPort http server port
-func HTTPPort() string {
-	return viper.GetString("http_port")
+// Port http server port
+func Port() string {
+	return viper.GetString("PORT")
 }

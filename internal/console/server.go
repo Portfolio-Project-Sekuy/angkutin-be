@@ -55,7 +55,7 @@ func run(cmd *cobra.Command, args []string) {
 	})
 
 	go func() {
-		err := server.Start(fmt.Sprintf(":%s", config.HTTPPort()))
+		err := server.Start(fmt.Sprintf(":%s", config.Port()))
 		if err != nil && err != http.ErrServerClosed {
 			errChan <- err
 		}
